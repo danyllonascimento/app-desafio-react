@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     StyleSheet, Text, View, SafeAreaView,
     ScrollView, TouchableOpacity, Image
@@ -9,97 +9,265 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import Container from '../components/Container';
 import Divider from '../assets/svg/divider.svg';
 
-
-
-
 export default function Servicos(props) {
     const [fontsLoaded] = useFonts({
         'Nunito-Sans': require('../assets/fonts/NunitoSans-SemiBold.ttf'),
     });
 
+
+    const [colorCorte, setColor] = useState('#F5816E33');
+    const [colorQuimica, setColorQuimica] = useState('white');
+    const [colorTextQuimica, setColorTextQuimica] = useState('#313131B2');
+    const [colorTextCorte, setColorTextCorte] = useState('#F57E88');
+    const [currentView, setCurrentView] = useState(1);
+
+
+
+    const handlePress = () => {
+        setColor('#F5816E33');
+        setColorQuimica('white');
+        setColorTextCorte('#F57E88');
+        setColorTextQuimica('#313131B2');
+        setCurrentView(1);
+    }
+    const handlePressQuimica = () => {
+        setColorQuimica('#F5816E33');
+        handlePressTextQuimica();
+        handlePressTextCorte();
+        setColor('white');
+        setCurrentView(2);
+    }
+    const handlePressTextQuimica = () => {
+        setColorTextQuimica('#F57E88');
+    }
+    const handlePressTextCorte = () => {
+        setColorTextCorte('#313131B2');
+    }
+
+
     if (!fontsLoaded) {
         return null;
+    }
+
+
+
+    const ViewServicos = () => {
+
+        if (currentView === 1) {
+
+            return (
+                <View>
+                    <View marginTop={33.5} style={styles.containerServico}>
+                        <View>
+                            <Text style={styles.textServicos.title}>Corte de cabelo infantil</Text>
+                            <Text style={styles.textServicos.subtitle}>A partir de R$ 35,00</Text>
+                        </View>
+                        <View>
+
+                            <Image style={styles.img} source={require('../assets/png/corteInfantil.png')} />
+
+                        </View>
+
+
+                    </View>
+
+                    <Container marginTop={12}>
+                        <Divider />
+                    </Container>
+
+                    <View marginTop={12} marginBottom={349} style={styles.containerServico}>
+                        <View>
+                            <Text style={styles.textServicos.title} >Corte de cabelo feminino</Text>
+                            <Text style={styles.textServicos.subtitle}>A partir de R$ 39,90</Text>
+                        </View>
+                        <View>
+                            <Image style={styles.img} source={require('../assets/png/corteFeminino.png')} />
+
+                        </View>
+
+
+                    </View>
+                </View>
+            );
+        } else {
+            return (
+
+                <View>
+                    <View marginTop={22} style={styles.containerServico}>
+                        <View>
+                            <Text style={styles.textServicos.title}>Progressiva raiz capilar</Text>
+                            <Text style={styles.textServicos.subtitle}>A partir de R$ 120,00</Text>
+                        </View>
+                        <View>
+
+                            <Image style={styles.img} source={require('../assets/png/progressivaraizcapila.png')} />
+
+                        </View>
+
+
+                    </View>
+
+                    <Container marginTop={12}>
+                        <Divider />
+                    </Container>
+
+                    <View marginTop={12} style={styles.containerServico}>
+                        <View>
+                            <Text style={styles.textServicos.title} >Progressiva capilar</Text>
+                            <Text style={styles.textServicos.subtitle}>A partir de R$ 150,00</Text>
+                        </View>
+                        <View>
+
+                            <TouchableOpacity   onPress={() => props.navigation.navigate('ServicosPreview')}>
+                                <Image style={styles.img} source={require('../assets/png/progressivacapilar.png')} />
+                            </TouchableOpacity>
+
+                        </View>
+
+
+                    </View>
+
+                    <Container marginTop={12}>
+                        <Divider />
+                    </Container>
+
+                    <View marginTop={12} style={styles.containerServico}>
+                        <View>
+                            <Text style={styles.textServicos.title} >Progressiva liso Glam</Text>
+                            <Text style={styles.textServicos.subtitle}>A partir de R$ 180,00</Text>
+                        </View>
+                        <View>
+                            <Image style={styles.img} source={require('../assets/png/progressivalisoglam.png')} />
+
+                        </View>
+
+
+                    </View>
+
+                    <Container marginTop={12}>
+                        <Divider />
+                    </Container>
+
+                    <View marginTop={12} style={styles.containerServico}>
+                        <View>
+                            <Text style={styles.textServicos.title} >Selagem capilar sem formol</Text>
+                            <Text style={styles.textServicos.subtitle}>A partir de R$ 129,99</Text>
+                        </View>
+                        <View>
+                            <Image style={styles.img} source={require('../assets/png/selagemcapilanformol.png')} />
+
+                        </View>
+
+
+                    </View>
+
+                    <Container marginTop={12}>
+                        <Divider />
+                    </Container>
+
+                    <View marginTop={12} style={styles.containerServico}>
+                        <View>
+                            <Text style={styles.textServicos.title} >Progressiva/selagem masculina</Text>
+                            <Text style={styles.textServicos.subtitle}>A partir de R$ 50,00</Text>
+                        </View>
+                        <View>
+                            <Image style={styles.img} source={require('../assets/png/progressivaselagemmasculina.png')} />
+
+                        </View>
+
+
+                    </View>
+
+                    <Container marginTop={12}>
+                        <Divider />
+                    </Container>
+
+                    <View marginTop={12} style={styles.containerServico}>
+                        <View>
+                            <Text style={styles.textServicos.title} >Alinhamento (cachos)</Text>
+                            <Text style={styles.textServicos.subtitle}>A partir de R$ 129,99</Text>
+                        </View>
+                        <View>
+                            <Image style={styles.img} source={require('../assets/png/alinhamentocachos.png')} />
+
+                        </View>
+
+
+                    </View>
+
+
+                </View>
+
+            );
+        }
+
+
+
+
+
     }
 
     return (
 
         <View style={{ backgroundColor: "white" }}>
-            <View marginTop={22} marginLeft={20} >
-                <Text style={styles.text2}>Categorias</Text>
-                <ScrollView horizontal={true} style={styles.container2} marginTop={16}>
-                    <View marginRight={10} style={[styles.buttonLogo, { backgroundColor: '#F5816E33' }]} >
-                        <Text
-                            onPress={() => props.navigation.navigate('Servicos')}
+            <ScrollView>
 
-                            style={[styles.text2, { color: '#F57E88', }]}>Cabelo</Text>
-                    </View>
-                    <View marginRight={10} style={styles.buttonLogo} >
-                        <Text style={[styles.text2, { color: '#313131B2' }]}>Design</Text>
-                    </View>
-                    <View marginRight={10} style={styles.buttonLogo} >
-                        <Text style={[styles.text2, { color: '#313131B2' }]}>Depilação</Text>
-                    </View>
-                    <View marginRight={10} style={styles.buttonLogo} >
-                        <Text style={[styles.text2, { color: '#313131B2' }]}>Massagens</Text>
-                    </View>
-                </ScrollView>
+                <View marginTop={22} marginLeft={20} >
+                    <Text style={styles.text2}>Categorias</Text>
+                    <ScrollView horizontal={true} style={styles.container2} marginTop={16}>
+                        <View marginRight={10} style={[styles.buttonLogo, { backgroundColor: '#F5816E33' }]} >
+                            <Text
+                                onPress={() => handlePress()}
 
+                                style={[styles.text2, { color: '#F57E88', }]}>Cabelo</Text>
+                        </View>
+                        <View marginRight={10} style={styles.buttonLogo} >
+                            <Text style={[styles.text2, { color: '#313131B2' }]}>Design</Text>
+                        </View>
+                        <View marginRight={10} style={styles.buttonLogo} >
+                            <Text style={[styles.text2, { color: '#313131B2' }]}>Depilação</Text>
+                        </View>
+                        <View marginRight={10} style={styles.buttonLogo} >
+                            <Text style={[styles.text2, { color: '#313131B2' }]}>Massagens</Text>
+                        </View>
+                    </ScrollView>
 
-            </View>
-
-            <Container marginTop={22}>
-                <Divider />
-            </Container>
-            <View marginTop={22} marginLeft={20} >
-                <Text style={styles.text2}>Serviços</Text>
-                <ScrollView horizontal={true} style={styles.container2} marginTop={16}>
-                    <View marginRight={10} style={[styles.buttonLogo, { backgroundColor: '#F5816E33' }]} >
-
-                        <Text
-                            onPress={() => props.navigation.navigate('Servicos')}
-
-                            style={[styles.text2, { color: '#F57E88' }]}>Corte</Text>
-                    </View>
-                    <View marginRight={10} style={styles.buttonLogo} >
-                        <Text style={[styles.text2, { color: '#313131B2' }]}>Escova</Text>
-                    </View>
-                    <View marginRight={10} style={styles.buttonLogo} >
-                        <Text style={[styles.text2, { color: '#313131B2' }]}>Penteado</Text>
-                    </View>
-                    <View marginRight={10} style={styles.buttonLogo} >
-                        <Text style={[styles.text2, { color: '#313131B2' }]}>Química</Text>
-                    </View>
-                </ScrollView>
-            </View>
-
-            <Container marginTop={22}>
-                <Divider />
-            </Container>
-            <View marginTop={33.5} style={styles.containerServico}>
-                <View>
-                    <Text style={styles.textServicos.title}>Corte de cabelo infantil</Text>
-                    <Text style={styles.textServicos.subtitle}>A partir de R$ 35,00</Text>
-                </View>
-                <View>
-
-                    <Image style={styles.img}  source={require('../assets/png/corteInfantil.png')} />
 
                 </View>
 
+                <Container marginTop={12}>
+                    <Divider />
+                </Container>
+                <View marginTop={1} marginLeft={20} >
+                    <Text style={styles.text2}>Serviços</Text>
+                    <ScrollView horizontal={true} style={styles.container2} marginTop={16}>
+                        <View marginRight={10} style={[styles.buttonLogo, { backgroundColor: colorCorte }]} >
 
-            </View>
-            <View marginTop={63} marginBottom={349} style={styles.containerServico}>
-                <View>
-                    <Text style={styles.textServicos.title} >Corte de cabelo feminino</Text>
-                    <Text style={styles.textServicos.subtitle}>A partir de R$ 39,90</Text>
+                            <Text
+                                onPress={() => handlePress()}
+
+                                style={[styles.text2, { color: colorTextCorte }]}>Corte</Text>
+                        </View>
+                        <View marginRight={10} style={styles.buttonLogo} >
+                            <Text style={[styles.text2, { color: '#313131B2' }]}>Escova</Text>
+                        </View>
+                        <View marginRight={10} style={styles.buttonLogo} >
+                            <Text style={[styles.text2, { color: '#313131B2' }]}>Penteado</Text>
+                        </View>
+                        <View marginRight={10} style={[styles.buttonLogo, { backgroundColor: colorQuimica }]} >
+                            <Text
+                                onPress={() => handlePressQuimica()}
+                                style={[styles.text2, { color: colorTextQuimica }]}>Química</Text>
+                        </View>
+                    </ScrollView>
                 </View>
-                <View>
-                    <Image style={styles.img} source={require('../assets/png/corteFeminino.png')} />
 
-                </View>
+                <Container marginTop={22}>
+                    <Divider />
+                </Container>
 
-
-            </View>
+                <ViewServicos />
+            </ScrollView>
         </View>
 
     );
@@ -197,7 +365,6 @@ const styles = StyleSheet.create({
         width: RFValue(90),
         height: RFValue(26),
         borderWidth: 1,
-
         borderRadius: RFValue(50),
         borderColor: '#F5816E',
         justifyContent: 'center',

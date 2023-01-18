@@ -106,7 +106,7 @@ const Entrar = (props) => {
                     colors={['#F16974', '#F68F69']}
                 >
                     <Button
-                      onPress={() => props.navigation.navigate('Inicio')}
+                      onPress={() => props.navigation.navigate('BottomNav')}
                         title={"Entrar"}
                         width={304}
                         height={38}
