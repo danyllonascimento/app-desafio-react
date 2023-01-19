@@ -15,10 +15,11 @@ import Termos from './screens/Termos';
 import Logo from './assets/svg/(sem fundo) GLAM - LOGO.svg';
 import Container from './components/Container';
 import Tabs from './Tabs';
-import { ImageBackground, Text, View } from 'react-native';
+import { Image, ImageBackground, Text, View } from 'react-native';
 import Servicos from './screens/Servicos';
 import ServicosPreview from './screens/ServicosPreview';
 import BottomNav from './BottomNav';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 
 
@@ -97,21 +98,38 @@ export function Routes(props) {
 
         })} />
       <Screen name='ServicosPreview' component={ServicosPreview}
+
+
         options={({ navigation }) => ({
           headerShown: true,
           title: '',
-      
 
-          headerLeft: ({ goBack }) => (
-            <View marginTop={50}>
-              <Text onPress={() => navigation.goBack()} >
-                <ButtonReturnCircle />
-              </Text>
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+
+          headerLargeTitle: true,
 
 
-            </View>
+          header: () =>
+          (
+            <ImageBackground source={require('./assets/png/progressivacapilarlarge.png')}>
+
+              <View marginLeft={20} marginTop={50} style={{ height: RFValue(135), width: RFValue(375) }}>
+                <Text onPress={() => navigation.goBack()} >
+
+                  <ButtonReturnCircle />
+                </Text>
+
+
+
+              </View>
+            </ImageBackground>
 
           ),
+
+
 
 
 
